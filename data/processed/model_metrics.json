@@ -1,0 +1,29 @@
+{
+  "caveat": "Backtest scores on this dataset are unusually high (AUC ~1.0) because once an account's usage starts declining here, it keeps declining in a smooth, persistent way (e.g. an account at 6,621 API calls falls to 3,146, then 1,608, then 803 - roughly halving each month). Tested directly: on the backtest, the model caught zero accounts that were not already visibly declining the month before, so this is NOT an early-warning system that predicts churn before any sign of it. It IS a validated way to prioritize the accounts already flagged by the reactive rule. A real production dataset would be noisier and the AUC would be lower. What generalizes is the METHOD: a time-based train/test split with no future leakage, backtested on a month the model never saw.",
+  "backtest_period": {
+    "trained_on": [
+      "2026-05 -> 2026-06",
+      "2026-06 -> 2026-07"
+    ],
+    "tested_on": "2026-07 -> 2026-08"
+  },
+  "auc": 1.0,
+  "precision_at_top_15pct": 1.0,
+  "recall_at_top_15pct": 0.622,
+  "truly_silent_catches_backtest": 0,
+  "top_risk_drivers": [
+    "trend3",
+    "contract_tier_Standard",
+    "vol"
+  ],
+  "excluded_from_customer_facing_reasons": {
+    "trend3": "Positive coefficient (increases modeled risk) even though positive trend3 means recent growth - a mean-reversion artifact of this dataset, not a real driver. Kept in the model and shown, labelled, in the feature-importance chart, but never surfaced as 'why' an account is flagged - a CSM would rightly distrust 'flagged because usage is growing.'",
+    "seat_util_credit_util": "Positive coefficients (higher utilization -> higher modeled risk) that contradict their own raw correlation with decline (-0.47, -0.39: low utilization does correlate with decline, as expected). The sign flips because both are collinear with mom/seat_mom, which already carry the same signal with far larger, unambiguous coefficients. Kept in the model and the feature-importance chart, excluded from 'reason' logic.",
+    "region_industry_tier": "Individually weak and not something a CSM can act on in a conversation."
+  },
+  "deployment": {
+    "high_priority_accounts_sep": 150,
+    "high_priority_arr": 10923960.0,
+    "high_priority_already_on_radar_pct": 1.0
+  }
+}

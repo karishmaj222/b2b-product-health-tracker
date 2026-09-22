@@ -1,0 +1,222 @@
+// Bulk import for Power BI Desktop: open DAX query view, paste this whole file, then click "Update model with changes".
+// Prerequisites: tables Usage and AccountSnapshot exist and are related on account_id, and an empty table named _Measures exists.
+// Afterwards set formats (see docs/dashboard_build_guide.md): % measures -> Percentage, ARR measures -> Currency in millions.
+
+DEFINE
+    MEASURE _Measures[Churn Threshold] =
+        -0.30            // API calls down >= 30% MoM
+
+    MEASURE _Measures[Expansion Growth Threshold] =
+        0.25  // API calls up >= 25% vs 3 months earlier
+
+    MEASURE _Measures[Expansion Uplift Assumption] =
+        0.25 // illustrative seat uplift used for pipeline sizing
+
+    MEASURE _Measures[Total Accounts] =
+        DISTINCTCOUNT ( Usage[account_id] )
+
+    MEASURE _Measures[Months in Context] =
+        DISTINCTCOUNT ( Usage[usage_month] )
+
+    MEASURE _Measures[Reporting Month] =
+        MAX ( Usage[usage_month] )         // format: mmm yyyy
+
+    MEASURE _Measures[API Calls] =
+        SUM ( Usage[total_api_calls] )
+
+    MEASURE _Measures[Active Seats] =
+        SUM ( Usage[active_seats] )
+
+    MEASURE _Measures[Credits Consumed] =
+        SUM ( Usage[credits_consumed] )
+
+    MEASURE _Measures[Licensed Seats] =
+        SUMX (
+            VALUES ( Usage[account_id] ),
+            CALCULATE ( MAX ( Usage[total_licensed_seats] ) )
+        )
+
+    MEASURE _Measures[Credit Allowance (Monthly)] =
+        SUMX (
+            VALUES ( Usage[account_id] ),
+            CALCULATE ( MAX ( Usage[monthly_credit_allowance] ) )
+        )
+
+    MEASURE _Measures[ARR] =
+        SUMX (
+            VALUES ( Usage[account_id] ),
+            CALCULATE ( MAX ( Usage[annual_contract_value] ) )
+        )                                   // format: $#,0.0,,"M"
+
+    MEASURE _Measures[Seat Utilization %] =
+        DIVIDE ( [Active Seats], [Licensed Seats] * [Months in Context] )
+
+    MEASURE _Measures[Credit Utilization %] =
+        DIVIDE ( [Credits Consumed], [Credit Allowance (Monthly)] * [Months in Context] )
+
+    MEASURE _Measures[Unused Seats] =
+        [Licensed Seats] * [Months in Context] - [Active Seats]
+
+    MEASURE _Measures[Accounts Over Credit Allowance] =
+        SUMX (
+            VALUES ( Usage[account_id] ),
+            IF ( [Credit Utilization %] > 1, 1, 0 )
+        )
+
+    MEASURE _Measures[API Calls (Prior Month)] =
+        VAR _m = [Reporting Month]
+        RETURN
+            CALCULATE ( [API Calls], Usage[usage_month] = EDATE ( _m, -1 ) )
+
+    MEASURE _Measures[API MoM %] =
+        VAR _m   = [Reporting Month]
+        VAR _cur = CALCULATE ( [API Calls], Usage[usage_month] = _m )
+        VAR _prv = CALCULATE ( [API Calls], Usage[usage_month] = EDATE ( _m, -1 ) )
+        RETURN
+            DIVIDE ( _cur - _prv, _prv )
+
+    MEASURE _Measures[API 3M Growth %] =
+        VAR _m   = [Reporting Month]
+        VAR _cur = CALCULATE ( [API Calls], Usage[usage_month] = _m )
+        VAR _3m  = CALCULATE ( [API Calls], Usage[usage_month] = EDATE ( _m, -3 ) )
+        RETURN
+            DIVIDE ( _cur - _3m, _3m )
+
+    MEASURE _Measures[Active Seats MoM %] =
+        VAR _m   = [Reporting Month]
+        VAR _cur = CALCULATE ( [Active Seats], Usage[usage_month] = _m )
+        VAR _prv = CALCULATE ( [Active Seats], Usage[usage_month] = EDATE ( _m, -1 ) )
+        RETURN
+            DIVIDE ( _cur - _prv, _prv )
+
+    MEASURE _Measures[API Usage Index] =
+        VAR _first = CALCULATE ( MIN ( Usage[usage_month] ), ALL ( Usage[usage_month] ) )
+        VAR _base  = CALCULATE ( [API Calls], Usage[usage_month] = _first )
+        RETURN
+            DIVIDE ( [API Calls], _base ) * 100
+
+    MEASURE _Measures[API Usage Index - All Accounts] =
+        CALCULATE ( [API Usage Index], REMOVEFILTERS ( AccountSnapshot ) )
+
+    MEASURE _Measures[API Usage Index - Churn Risk] =
+        CALCULATE (
+            [API Usage Index],
+            AccountSnapshot[account_status] = "Churn Risk"
+        )
+
+    MEASURE _Measures[API Usage Index - Expansion] =
+        CALCULATE (
+            [API Usage Index],
+            AccountSnapshot[account_status] = "Expansion Opportunity"
+        )
+
+    MEASURE _Measures[API Usage Index - Healthy & Low Adoption] =
+        CALCULATE (
+            [API Usage Index],
+            AccountSnapshot[account_status] IN { "Healthy", "Low Adoption" }
+        )
+
+    MEASURE _Measures[Accounts with Severe Usage Decline] =
+        SUMX (
+            VALUES ( Usage[account_id] ),
+            IF ( [API MoM %] <= [Churn Threshold], 1, 0 )
+        )
+
+    MEASURE _Measures[Accounts at Risk] =
+        CALCULATE ( [Total Accounts], AccountSnapshot[account_status] = "Churn Risk" )
+
+    MEASURE _Measures[ARR at Risk] =
+        CALCULATE ( [ARR], AccountSnapshot[account_status] = "Churn Risk" )
+
+    MEASURE _Measures[% Accounts at Risk] =
+        DIVIDE ( [Accounts at Risk], [Total Accounts] )
+
+    MEASURE _Measures[% ARR at Risk] =
+        DIVIDE ( [ARR at Risk], [ARR] )
+
+    MEASURE _Measures[Expansion Accounts] =
+        CALCULATE ( [Total Accounts], AccountSnapshot[account_status] = "Expansion Opportunity" )
+
+    MEASURE _Measures[Expansion Base ARR] =
+        CALCULATE ( [ARR], AccountSnapshot[account_status] = "Expansion Opportunity" )
+
+    MEASURE _Measures[Estimated Expansion ARR] =
+        [Expansion Base ARR] * [Expansion Uplift Assumption]     // illustrative pipeline sizing
+
+    MEASURE _Measures[Tier Upgrade Candidates] =
+        CALCULATE (
+            [Total Accounts],
+            AccountSnapshot[account_status] = "Expansion Opportunity",
+            Usage[contract_tier] <> "Enterprise"
+        )
+
+    MEASURE _Measures[Low Adoption Accounts] =
+        CALCULATE ( [Total Accounts], AccountSnapshot[account_status] = "Low Adoption" )
+
+    MEASURE _Measures[Low Adoption ARR] =
+        CALCULATE ( [ARR], AccountSnapshot[account_status] = "Low Adoption" )
+
+    MEASURE _Measures[Healthy Accounts] =
+        CALCULATE ( [Total Accounts], AccountSnapshot[account_status] = "Healthy" )
+
+    MEASURE _Measures[Headline Insight] =
+        "Aggregate API volume is "
+            & FORMAT ( [API 3M Growth %], "+0.0%;-0.0%" )
+            & " vs 3 months ago, but "
+            & FORMAT ( [Accounts at Risk], "#,0" )
+            & " accounts ("
+            & FORMAT ( [% Accounts at Risk], "0%" )
+            & ") show severe usage decline, putting "
+            & FORMAT ( [ARR at Risk] / 1000000, "$#,0.0" )
+            & "M ARR ("
+            & FORMAT ( [% ARR at Risk], "0%" )
+            & ") at risk."
+
+    MEASURE _Measures[Churn Radar Callout] =
+        FORMAT ( [Accounts at Risk], "#,0" )
+            & " accounts are in severe decline. Enterprise accounts hold "
+            & FORMAT (
+                DIVIDE (
+                    CALCULATE ( [ARR at Risk], Usage[contract_tier] = "Enterprise" ),
+                    [ARR at Risk]
+                ),
+                "0%"
+            )
+            & " of the ARR at risk."
+
+    MEASURE _Measures[Expansion Callout] =
+        FORMAT ( [Expansion Accounts], "#,0" )
+            & " accounts are growing fast and near their seat or credit limit - about "
+            & FORMAT ( [Estimated Expansion ARR] / 1000000, "$#,0.0" )
+            & "M of upsell potential (assumes +"
+            & FORMAT ( [Expansion Uplift Assumption], "0%" )
+            & " seats)."
+
+    MEASURE _Measures[Status Color] =
+        SWITCH (
+            SELECTEDVALUE ( AccountSnapshot[account_status] ),
+            "Churn Risk",            "#D64545",
+            "Expansion Opportunity", "#1F9D74",
+            "Low Adoption",          "#E8A33D",
+            "Healthy",               "#4C78A8",
+            "#8A94A6"
+        )
+
+    MEASURE _Measures[MoM Trend Color] =
+        SWITCH (
+            TRUE (),
+            [API MoM %] <= [Churn Threshold], "#D64545",
+            [API MoM %] < 0,                  "#E8A33D",
+            "#1F9D74"
+        )
+
+    MEASURE _Measures[MoM Trend Arrow] =
+        SWITCH (
+            TRUE (),
+            ISBLANK ( [API MoM %] ), "",
+            [API MoM %] <= [Churn Threshold], "▼▼ ",
+            [API MoM %] < 0,                  "▼ ",
+            "▲ "
+        )
+
+EVALUATE ROW("Measures defined", 1)

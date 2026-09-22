@@ -1,0 +1,36 @@
+{
+  "name": "B2B Product Health - Navy & Signal",
+  "dataColors": [
+    "#0B2545", "#13A89E", "#4C78A8", "#E8A33D", "#D64545", "#1F9D74",
+    "#8A94A6", "#6C5B7B", "#F2C14E", "#2E86AB"
+  ],
+  "background": "#FFFFFF",
+  "foreground": "#0B2545",
+  "tableAccent": "#0B2545",
+  "good": "#1F9D74",
+  "neutral": "#E8A33D",
+  "bad": "#D64545",
+  "maximum": "#0B2545",
+  "center": "#F2C14E",
+  "minimum": "#DCE6F2",
+  "textClasses": {
+    "title":   { "fontFace": "Segoe UI Semibold", "fontSize": 12, "color": "#0B2545" },
+    "label":   { "fontFace": "Segoe UI",          "fontSize": 10, "color": "#4A5568" },
+    "callout": { "fontFace": "Segoe UI Semibold", "fontSize": 28, "color": "#0B2545" },
+    "header":  { "fontFace": "Segoe UI Semibold", "fontSize": 11, "color": "#0B2545" }
+  },
+  "visualStyles": {
+    "*": {
+      "*": {
+        "title": [ { "show": true, "fontColor": { "solid": { "color": "#0B2545" } }, "fontSize": 12, "fontFamily": "Segoe UI Semibold" } ],
+        "background": [ { "show": true, "color": { "solid": { "color": "#FFFFFF" } }, "transparency": 0 } ],
+        "border": [ { "show": true, "color": { "solid": { "color": "#E3E8F0" } }, "radius": 8 } ]
+      }
+    },
+    "page": {
+      "*": {
+        "background": [ { "color": { "solid": { "color": "#F4F6FA" } }, "transparency": 0 } ]
+      }
+    }
+  }
+}

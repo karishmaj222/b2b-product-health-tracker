@@ -1,0 +1,125 @@
+account_id,account_name,global_region,industry_vertical,contract_tier,active_seats,total_licensed_seats,credits_consumed,monthly_credit_allowance,annual_contract_value,snapshot_month,api_calls_latest,api_mom_pct,api_3m_pct,seat_utilization,credit_utilization,account_status
+ACC_0110,BizCorp_0110,AMER,Retail,Enterprise,445,521,107077,220346,281340,2026-08-01,131562,0.289,0.885,0.854,0.486,Expansion Opportunity
+ACC_0494,BizCorp_0494,AMER,Retail,Enterprise,353,497,427755,363592,268380,2026-08-01,494896,0.121,0.444,0.71,1.176,Expansion Opportunity
+ACC_0586,BizCorp_0586,EMEA,Technology,Enterprise,409,486,92982,184142,262440,2026-08-01,110641,0.122,0.607,0.842,0.505,Expansion Opportunity
+ACC_0125,BizCorp_0125,AMER,Healthcare,Enterprise,469,469,189377,218070,253260,2026-08-01,231814,0.188,0.684,1.0,0.868,Expansion Opportunity
+ACC_0373,BizCorp_0373,EMEA,Technology,Enterprise,354,440,373537,622634,237600,2026-08-01,432621,0.184,0.525,0.805,0.6,Expansion Opportunity
+ACC_0049,BizCorp_0049,EMEA,Technology,Enterprise,393,393,341040,402100,212220,2026-08-01,401726,0.133,0.696,1.0,0.848,Expansion Opportunity
+ACC_0642,BizCorp_0642,EMEA,Technology,Enterprise,330,390,180324,271687,210600,2026-08-01,218594,0.181,0.566,0.846,0.664,Expansion Opportunity
+ACC_0045,BizCorp_0045,APAC,Technology,Enterprise,375,384,142427,220646,207360,2026-08-01,157420,0.096,0.948,0.977,0.646,Expansion Opportunity
+ACC_0311,BizCorp_0311,APAC,Healthcare,Enterprise,351,367,318194,456709,198180,2026-08-01,355213,0.16,0.836,0.956,0.697,Expansion Opportunity
+ACC_0263,BizCorp_0263,AMER,Technology,Enterprise,271,363,291030,247376,196020,2026-08-01,348315,0.264,0.776,0.747,1.176,Expansion Opportunity
+ACC_0541,BizCorp_0541,EMEA,Retail,Enterprise,252,357,351609,318878,192780,2026-08-01,435639,0.159,0.49,0.706,1.103,Expansion Opportunity
+ACC_0947,BizCorp_0947,AMER,Technology,Enterprise,191,347,141088,125915,187380,2026-08-01,177096,0.226,0.753,0.55,1.121,Expansion Opportunity
+ACC_0691,BizCorp_0691,AMER,Technology,Enterprise,296,338,332429,282565,182520,2026-08-01,394890,0.11,0.911,0.876,1.176,Expansion Opportunity
+ACC_0329,BizCorp_0329,APAC,Healthcare,Enterprise,327,327,259814,322645,176580,2026-08-01,286900,0.155,0.586,1.0,0.805,Expansion Opportunity
+ACC_0304,BizCorp_0304,AMER,Healthcare,Enterprise,321,321,181109,358808,173340,2026-08-01,209728,0.094,0.658,1.0,0.505,Expansion Opportunity
+ACC_0367,BizCorp_0367,EMEA,Technology,Enterprise,285,319,136711,305637,172260,2026-08-01,175193,0.197,1.113,0.893,0.447,Expansion Opportunity
+ACC_0008,BizCorp_0008,EMEA,Technology,Enterprise,304,317,328407,278389,171180,2026-08-01,403785,0.189,0.51,0.959,1.18,Expansion Opportunity
+ACC_0724,BizCorp_0724,AMER,Healthcare,Enterprise,291,312,104699,102370,168480,2026-08-01,126218,0.169,0.291,0.933,1.023,Expansion Opportunity
+ACC_0077,BizCorp_0077,AMER,Technology,Enterprise,254,254,503832,447806,137160,2026-08-01,632175,0.179,0.673,1.0,1.125,Expansion Opportunity
+ACC_0790,BizCorp_0790,APAC,Manufacturing,Enterprise,244,244,395314,711093,131760,2026-08-01,436281,0.049,0.571,1.0,0.556,Expansion Opportunity
+ACC_0571,BizCorp_0571,AMER,Manufacturing,Enterprise,193,240,121090,221256,129600,2026-08-01,151969,0.317,1.113,0.804,0.547,Expansion Opportunity
+ACC_0033,BizCorp_0033,AMER,Retail,Enterprise,164,235,400984,362451,126900,2026-08-01,448046,0.035,0.566,0.698,1.106,Expansion Opportunity
+ACC_0129,BizCorp_0129,AMER,Retail,Enterprise,185,234,175776,159019,126360,2026-08-01,217343,0.254,0.817,0.791,1.105,Expansion Opportunity
+ACC_0286,BizCorp_0286,APAC,Technology,Enterprise,209,229,343972,566557,123660,2026-08-01,437014,0.324,0.821,0.913,0.607,Expansion Opportunity
+ACC_0073,BizCorp_0073,EMEA,Technology,Enterprise,210,210,435665,365229,113400,2026-08-01,555920,0.222,0.828,1.0,1.193,Expansion Opportunity
+ACC_0449,BizCorp_0449,AMER,Healthcare,Premium,94,156,26572,28702,112320,2026-08-01,31002,0.211,0.556,0.603,0.926,Expansion Opportunity
+ACC_0851,BizCorp_0851,EMEA,Healthcare,Enterprise,134,203,476012,404610,109620,2026-08-01,609028,0.257,0.85,0.66,1.176,Expansion Opportunity
+ACC_0161,BizCorp_0161,EMEA,Technology,Enterprise,201,201,250462,403378,108540,2026-08-01,289420,0.207,0.868,1.0,0.621,Expansion Opportunity
+ACC_0383,BizCorp_0383,APAC,Financial Services,Premium,78,134,31039,34033,96480,2026-08-01,34865,0.082,0.642,0.582,0.912,Expansion Opportunity
+ACC_0501,BizCorp_0501,EMEA,Technology,Premium,85,128,59232,53340,92160,2026-08-01,73794,0.159,0.876,0.664,1.11,Expansion Opportunity
+ACC_0998,BizCorp_0998,APAC,Retail,Enterprise,128,159,113343,292767,85860,2026-08-01,137615,0.175,0.852,0.805,0.387,Expansion Opportunity
+ACC_0525,BizCorp_0525,EMEA,Healthcare,Premium,84,103,29918,49391,74160,2026-08-01,36216,0.141,0.823,0.816,0.606,Expansion Opportunity
+ACC_0946,BizCorp_0946,AMER,Logistics,Enterprise,136,136,169875,256258,73440,2026-08-01,203274,0.299,0.509,1.0,0.663,Expansion Opportunity
+ACC_0397,BizCorp_0397,EMEA,Technology,Premium,95,95,14719,15412,68400,2026-08-01,17998,0.286,0.792,1.0,0.955,Expansion Opportunity
+ACC_0030,BizCorp_0030,APAC,Logistics,Premium,85,91,12977,20752,65520,2026-08-01,15235,0.178,0.594,0.934,0.625,Expansion Opportunity
+ACC_0437,BizCorp_0437,EMEA,Financial Services,Premium,54,90,74094,65441,64800,2026-08-01,84421,0.217,0.801,0.6,1.132,Expansion Opportunity
+ACC_0360,BizCorp_0360,AMER,Healthcare,Premium,65,89,22663,19264,64080,2026-08-01,27935,0.288,0.353,0.73,1.176,Expansion Opportunity
+ACC_0492,BizCorp_0492,AMER,Technology,Enterprise,101,114,177951,211469,61560,2026-08-01,219961,0.105,0.309,0.886,0.841,Expansion Opportunity
+ACC_0336,BizCorp_0336,EMEA,Technology,Premium,73,82,35580,70846,59040,2026-08-01,39834,0.164,0.609,0.89,0.502,Expansion Opportunity
+ACC_0546,BizCorp_0546,APAC,Technology,Premium,65,81,42560,59112,58320,2026-08-01,47154,0.046,0.679,0.802,0.72,Expansion Opportunity
+ACC_0504,BizCorp_0504,AMER,Logistics,Premium,80,80,51993,44194,57600,2026-08-01,66569,0.321,0.797,1.0,1.176,Expansion Opportunity
+ACC_0466,BizCorp_0466,AMER,Financial Services,Premium,80,80,20438,37408,57600,2026-08-01,25843,0.344,0.727,1.0,0.546,Expansion Opportunity
+ACC_0015,BizCorp_0015,EMEA,Technology,Premium,75,79,67002,61660,56880,2026-08-01,85322,0.182,0.824,0.949,1.087,Expansion Opportunity
+ACC_0264,BizCorp_0264,APAC,Healthcare,Premium,55,79,41734,45391,56880,2026-08-01,52894,0.367,0.591,0.696,0.919,Expansion Opportunity
+ACC_0271,BizCorp_0271,EMEA,Retail,Premium,68,78,38878,58772,56160,2026-08-01,47498,0.275,0.527,0.872,0.662,Expansion Opportunity
+ACC_0272,BizCorp_0272,EMEA,Healthcare,Premium,77,77,53968,106055,55440,2026-08-01,62740,0.181,0.678,1.0,0.509,Expansion Opportunity
+ACC_0185,BizCorp_0185,EMEA,Financial Services,Premium,74,77,36962,52299,55440,2026-08-01,47231,0.247,0.783,0.961,0.707,Expansion Opportunity
+ACC_0577,BizCorp_0577,APAC,Manufacturing,Premium,69,75,54002,45902,54000,2026-08-01,66767,0.312,0.624,0.92,1.176,Expansion Opportunity
+ACC_0111,BizCorp_0111,APAC,Technology,Premium,72,75,32974,65906,54000,2026-08-01,42237,0.24,0.589,0.96,0.5,Expansion Opportunity
+ACC_0050,BizCorp_0050,AMER,Financial Services,Premium,61,73,18614,32478,52560,2026-08-01,20984,0.215,0.672,0.836,0.573,Expansion Opportunity
+ACC_0029,BizCorp_0029,EMEA,Retail,Premium,69,69,67759,59052,49680,2026-08-01,85434,0.326,0.798,1.0,1.147,Expansion Opportunity
+ACC_0321,BizCorp_0321,AMER,Financial Services,Premium,41,69,44410,37748,49680,2026-08-01,54646,0.298,0.514,0.594,1.176,Expansion Opportunity
+ACC_0026,BizCorp_0026,AMER,Retail,Premium,67,67,36697,34373,48240,2026-08-01,41851,0.22,0.674,1.0,1.068,Expansion Opportunity
+ACC_0331,BizCorp_0331,EMEA,Manufacturing,Premium,57,66,28842,65112,47520,2026-08-01,36934,0.2,0.291,0.864,0.443,Expansion Opportunity
+ACC_0779,BizCorp_0779,APAC,Manufacturing,Premium,64,64,33475,65266,46080,2026-08-01,37243,0.038,0.436,1.0,0.513,Expansion Opportunity
+ACC_0163,BizCorp_0163,APAC,Logistics,Premium,43,63,42672,36271,45360,2026-08-01,52439,0.168,0.991,0.683,1.176,Expansion Opportunity
+ACC_0522,BizCorp_0522,AMER,Technology,Premium,62,62,36747,77664,44640,2026-08-01,46652,0.35,0.61,1.0,0.473,Expansion Opportunity
+ACC_0434,BizCorp_0434,APAC,Manufacturing,Premium,59,59,23774,27387,42480,2026-08-01,28977,0.205,0.703,1.0,0.868,Expansion Opportunity
+ACC_0712,BizCorp_0712,AMER,Manufacturing,Premium,53,53,34365,31178,38160,2026-08-01,40898,0.291,0.735,1.0,1.102,Expansion Opportunity
+ACC_0172,BizCorp_0172,APAC,Logistics,Premium,43,52,52293,56904,37440,2026-08-01,65870,0.227,0.785,0.827,0.919,Expansion Opportunity
+ACC_0468,BizCorp_0468,APAC,Logistics,Premium,31,51,57370,53648,36720,2026-08-01,66038,0.09,0.386,0.608,1.069,Expansion Opportunity
+ACC_0941,BizCorp_0941,EMEA,Technology,Premium,27,49,65804,55933,35280,2026-08-01,74185,0.067,0.534,0.551,1.176,Expansion Opportunity
+ACC_0662,BizCorp_0662,APAC,Financial Services,Premium,41,48,42832,73142,34560,2026-08-01,55164,0.215,0.742,0.854,0.586,Expansion Opportunity
+ACC_0958,BizCorp_0958,AMER,Retail,Premium,36,47,22468,19098,33840,2026-08-01,25975,0.087,0.469,0.766,1.176,Expansion Opportunity
+ACC_0805,BizCorp_0805,APAC,Healthcare,Premium,36,45,23120,45676,32400,2026-08-01,29529,0.381,0.693,0.8,0.506,Expansion Opportunity
+ACC_0243,BizCorp_0243,APAC,Technology,Premium,37,45,82082,92938,32400,2026-08-01,102747,0.182,0.801,0.822,0.883,Expansion Opportunity
+ACC_0591,BizCorp_0591,AMER,Financial Services,Premium,39,41,25817,38738,29520,2026-08-01,32467,0.247,0.409,0.951,0.666,Expansion Opportunity
+ACC_0500,BizCorp_0500,AMER,Logistics,Premium,40,40,53086,90980,28800,2026-08-01,68394,0.321,1.054,1.0,0.583,Expansion Opportunity
+ACC_0906,BizCorp_0906,AMER,Technology,Premium,38,38,76695,100345,27360,2026-08-01,88825,0.18,0.654,1.0,0.764,Expansion Opportunity
+ACC_0704,BizCorp_0704,EMEA,Retail,Premium,37,37,22780,32248,26640,2026-08-01,26858,0.091,1.002,1.0,0.706,Expansion Opportunity
+ACC_0772,BizCorp_0772,APAC,Technology,Premium,33,36,58694,49890,25920,2026-08-01,70106,0.221,0.553,0.917,1.176,Expansion Opportunity
+ACC_0677,BizCorp_0677,APAC,Financial Services,Premium,21,35,18691,16354,25200,2026-08-01,22198,0.046,0.312,0.6,1.143,Expansion Opportunity
+ACC_0312,BizCorp_0312,AMER,Retail,Standard,15,25,6169,6544,24000,2026-08-01,7635,0.243,1.033,0.6,0.943,Expansion Opportunity
+ACC_0027,BizCorp_0027,AMER,Financial Services,Premium,32,32,65144,69530,23040,2026-08-01,83875,0.404,0.658,1.0,0.937,Expansion Opportunity
+ACC_0733,BizCorp_0733,APAC,Logistics,Premium,21,31,27313,23216,22320,2026-08-01,30769,0.049,0.864,0.677,1.176,Expansion Opportunity
+ACC_0757,BizCorp_0757,EMEA,Manufacturing,Standard,19,23,4153,11991,22080,2026-08-01,4943,0.102,0.472,0.826,0.346,Expansion Opportunity
+ACC_0375,BizCorp_0375,EMEA,Financial Services,Standard,16,23,6058,5149,22080,2026-08-01,7848,0.234,0.708,0.696,1.177,Expansion Opportunity
+ACC_0433,BizCorp_0433,APAC,Technology,Premium,30,30,50237,102375,21600,2026-08-01,64433,0.318,1.213,1.0,0.491,Expansion Opportunity
+ACC_0409,BizCorp_0409,AMER,Healthcare,Standard,19,22,28146,83169,21120,2026-08-01,35642,0.239,0.866,0.864,0.338,Expansion Opportunity
+ACC_0074,BizCorp_0074,EMEA,Manufacturing,Premium,29,29,26217,36009,20880,2026-08-01,32049,0.201,0.898,1.0,0.728,Expansion Opportunity
+ACC_0164,BizCorp_0164,APAC,Healthcare,Premium,27,28,24776,27174,20160,2026-08-01,30431,0.121,0.33,0.964,0.912,Expansion Opportunity
+ACC_0881,BizCorp_0881,AMER,Healthcare,Premium,25,27,50016,91339,19440,2026-08-01,57467,0.197,0.479,0.926,0.548,Expansion Opportunity
+ACC_0533,BizCorp_0533,AMER,Financial Services,Premium,24,27,28371,41056,19440,2026-08-01,32921,0.206,0.312,0.889,0.691,Expansion Opportunity
+ACC_0052,BizCorp_0052,APAC,Logistics,Premium,27,27,34651,64129,19440,2026-08-01,44870,0.409,0.739,1.0,0.54,Expansion Opportunity
+ACC_0903,BizCorp_0903,EMEA,Healthcare,Standard,19,20,8852,20230,19200,2026-08-01,11241,0.326,0.931,0.95,0.438,Expansion Opportunity
+ACC_0848,BizCorp_0848,AMER,Healthcare,Standard,14,20,6725,5716,19200,2026-08-01,7975,0.161,0.643,0.7,1.177,Expansion Opportunity
+ACC_0464,BizCorp_0464,AMER,Manufacturing,Standard,17,20,11161,24034,19200,2026-08-01,13467,0.305,0.586,0.85,0.464,Expansion Opportunity
+ACC_0088,BizCorp_0088,AMER,Logistics,Premium,26,26,33683,43449,18720,2026-08-01,38089,0.059,0.853,1.0,0.775,Expansion Opportunity
+ACC_0019,BizCorp_0019,EMEA,Logistics,Standard,19,19,8595,11216,18240,2026-08-01,9584,0.2,0.653,1.0,0.766,Expansion Opportunity
+ACC_0094,BizCorp_0094,AMER,Technology,Premium,25,25,32361,50847,18000,2026-08-01,38272,0.203,0.554,1.0,0.636,Expansion Opportunity
+ACC_0950,BizCorp_0950,APAC,Logistics,Standard,18,18,9922,13476,17280,2026-08-01,12065,0.132,0.564,1.0,0.736,Expansion Opportunity
+ACC_0100,BizCorp_0100,APAC,Manufacturing,Standard,18,18,10652,10663,17280,2026-08-01,13234,0.196,0.994,1.0,0.999,Expansion Opportunity
+ACC_0701,BizCorp_0701,AMER,Technology,Premium,22,24,44887,70421,17280,2026-08-01,57497,0.368,0.954,0.917,0.637,Expansion Opportunity
+ACC_0782,BizCorp_0782,AMER,Retail,Premium,20,23,25538,30692,16560,2026-08-01,32252,0.053,0.28,0.87,0.832,Expansion Opportunity
+ACC_0482,BizCorp_0482,APAC,Retail,Standard,15,16,13265,27745,15360,2026-08-01,16593,0.352,0.656,0.938,0.478,Expansion Opportunity
+ACC_0431,BizCorp_0431,AMER,Retail,Standard,16,16,10834,19953,15360,2026-08-01,12068,0.074,0.351,1.0,0.543,Expansion Opportunity
+ACC_0327,BizCorp_0327,EMEA,Technology,Standard,8,16,3150,3430,15360,2026-08-01,3690,0.118,1.077,0.5,0.918,Expansion Opportunity
+ACC_0554,BizCorp_0554,AMER,Logistics,Premium,21,21,55573,64416,15120,2026-08-01,67857,0.156,0.556,1.0,0.863,Expansion Opportunity
+ACC_0070,BizCorp_0070,EMEA,Healthcare,Standard,15,15,7892,8910,14400,2026-08-01,9236,0.201,0.806,1.0,0.886,Expansion Opportunity
+ACC_0036,BizCorp_0036,AMER,Financial Services,Standard,15,15,14490,13005,14400,2026-08-01,16702,0.115,0.747,1.0,1.114,Expansion Opportunity
+ACC_0667,BizCorp_0667,AMER,Manufacturing,Standard,12,14,8969,10098,13440,2026-08-01,11596,0.274,0.76,0.857,0.888,Expansion Opportunity
+ACC_0093,BizCorp_0093,APAC,Financial Services,Standard,13,13,8926,7608,12480,2026-08-01,10020,0.21,0.503,1.0,1.173,Expansion Opportunity
+ACC_0031,BizCorp_0031,AMER,Manufacturing,Standard,11,13,7722,10573,12480,2026-08-01,9016,0.187,0.681,0.846,0.73,Expansion Opportunity
+ACC_0079,BizCorp_0079,APAC,Technology,Standard,11,13,5150,9616,12480,2026-08-01,6392,0.332,0.781,0.846,0.536,Expansion Opportunity
+ACC_0044,BizCorp_0044,EMEA,Financial Services,Standard,12,12,5525,6049,11520,2026-08-01,6478,0.106,0.683,1.0,0.913,Expansion Opportunity
+ACC_0154,BizCorp_0154,AMER,Retail,Standard,6,12,14691,14257,11520,2026-08-01,17157,0.118,0.643,0.5,1.03,Expansion Opportunity
+ACC_0348,BizCorp_0348,APAC,Manufacturing,Standard,8,12,8502,8072,11520,2026-08-01,9443,0.045,0.63,0.667,1.053,Expansion Opportunity
+ACC_0062,BizCorp_0062,AMER,Financial Services,Standard,11,11,7818,9861,10560,2026-08-01,9678,0.175,0.836,1.0,0.793,Expansion Opportunity
+ACC_0589,BizCorp_0589,AMER,Manufacturing,Standard,11,11,8342,19361,10560,2026-08-01,9731,0.263,0.646,1.0,0.431,Expansion Opportunity
+ACC_0484,BizCorp_0484,AMER,Logistics,Standard,6,11,8654,7356,10560,2026-08-01,10820,0.285,0.815,0.545,1.176,Expansion Opportunity
+ACC_0964,BizCorp_0964,APAC,Manufacturing,Standard,7,11,6315,5368,10560,2026-08-01,7877,0.23,0.582,0.636,1.176,Expansion Opportunity
+ACC_0708,BizCorp_0708,AMER,Healthcare,Standard,8,10,8444,17089,9600,2026-08-01,10210,0.125,0.57,0.8,0.494,Expansion Opportunity
+ACC_0028,BizCorp_0028,APAC,Financial Services,Standard,10,10,9227,11916,9600,2026-08-01,10396,0.208,0.45,1.0,0.774,Expansion Opportunity
+ACC_0580,BizCorp_0580,APAC,Manufacturing,Standard,9,10,8392,15188,9600,2026-08-01,10255,0.267,0.742,0.9,0.553,Expansion Opportunity
+ACC_0200,BizCorp_0200,AMER,Technology,Standard,6,10,8387,7741,9600,2026-08-01,10293,0.306,0.522,0.6,1.083,Expansion Opportunity
+ACC_0039,BizCorp_0039,APAC,Healthcare,Standard,7,9,7434,7103,8640,2026-08-01,8857,0.139,1.048,0.778,1.047,Expansion Opportunity
+ACC_0829,BizCorp_0829,AMER,Technology,Standard,9,9,7325,10288,8640,2026-08-01,9301,0.234,0.576,1.0,0.712,Expansion Opportunity
+ACC_0219,BizCorp_0219,APAC,Healthcare,Standard,7,8,5360,4556,7680,2026-08-01,6109,-0.023,0.387,0.875,1.176,Expansion Opportunity
+ACC_0548,BizCorp_0548,APAC,Financial Services,Standard,7,8,6354,8084,7680,2026-08-01,7656,0.31,0.809,0.875,0.786,Expansion Opportunity
+ACC_0046,BizCorp_0046,AMER,Financial Services,Standard,7,7,7197,5964,6720,2026-08-01,7967,0.171,0.73,1.0,1.207,Expansion Opportunity
+ACC_0811,BizCorp_0811,APAC,Logistics,Standard,6,7,7423,13063,6720,2026-08-01,8669,0.143,0.585,0.857,0.568,Expansion Opportunity
+ACC_0496,BizCorp_0496,AMER,Technology,Standard,4,6,15222,14358,5760,2026-08-01,17712,0.223,0.42,0.667,1.06,Expansion Opportunity
+ACC_0475,BizCorp_0475,APAC,Financial Services,Standard,6,6,9863,17361,5760,2026-08-01,11997,0.301,0.512,1.0,0.568,Expansion Opportunity
+ACC_0959,BizCorp_0959,AMER,Healthcare,Standard,5,5,6426,8617,4800,2026-08-01,7821,0.093,0.3,1.0,0.746,Expansion Opportunity

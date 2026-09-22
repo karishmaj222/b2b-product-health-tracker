@@ -1,0 +1,266 @@
+/*=====================================================================================
+  B2B PRODUCT HEALTH & REVENUE EXPANSION TRACKER  -  DAX MEASURES
+  ---------------------------------------------------------------------------------
+  DATA MODEL
+    Usage            (fact, 6,000 rows)  <- data/processed/enhanced_b2b_product_metrics.csv
+    AccountSnapshot  (dim, 1,000 rows)   <- data/processed/dim_account_snapshot.csv
+    Relationship:    AccountSnapshot[account_id] 1 ---> * Usage[account_id]  (single direction)
+    Measures live in an empty table called  _Measures  (Enter Data -> blank table).
+
+  CONVENTIONS
+    * "Reporting month" = the month chosen in the month slicer (single select, default = latest).
+    * Static account attributes (licensed seats, allowance, ARR) repeat on every monthly row,
+      so they are NEVER summed directly - they are taken once per account (SUMX over VALUES).
+    * Business thresholds are stored as measures in section 0 so they can be changed in one place.
+      They mirror the constants in scripts/data_enhancement.py.
+
+  NOTE: ARR is ILLUSTRATIVE (licensed seats x assumed list price x 12) - see README.
+=====================================================================================*/
+
+
+//====================================================================================
+// 0. THRESHOLDS  (single source of truth for business rules)
+//====================================================================================
+Churn Threshold = -0.30            // API calls down >= 30% MoM
+Expansion Growth Threshold = 0.25  // API calls up >= 25% vs 3 months earlier
+Expansion Uplift Assumption = 0.25 // illustrative seat uplift used for pipeline sizing
+
+
+//====================================================================================
+// 1. BASE METRICS
+//====================================================================================
+Total Accounts =
+DISTINCTCOUNT ( Usage[account_id] )
+
+Months in Context =
+DISTINCTCOUNT ( Usage[usage_month] )
+
+Reporting Month =
+MAX ( Usage[usage_month] )         // format: mmm yyyy
+
+API Calls =
+SUM ( Usage[total_api_calls] )
+
+Active Seats =
+SUM ( Usage[active_seats] )
+
+Credits Consumed =
+SUM ( Usage[credits_consumed] )
+
+Licensed Seats =
+SUMX (
+    VALUES ( Usage[account_id] ),
+    CALCULATE ( MAX ( Usage[total_licensed_seats] ) )
+)
+
+Credit Allowance (Monthly) =
+SUMX (
+    VALUES ( Usage[account_id] ),
+    CALCULATE ( MAX ( Usage[monthly_credit_allowance] ) )
+)
+
+ARR =
+SUMX (
+    VALUES ( Usage[account_id] ),
+    CALCULATE ( MAX ( Usage[annual_contract_value] ) )
+)                                   // format: $#,0.0,,"M"
+
+
+//====================================================================================
+// 2. UTILIZATION & ADOPTION
+//     (divide by Months in Context so the ratio is right for 1 month or many)
+//====================================================================================
+Seat Utilization % =
+DIVIDE ( [Active Seats], [Licensed Seats] * [Months in Context] )
+
+Credit Utilization % =
+DIVIDE ( [Credits Consumed], [Credit Allowance (Monthly)] * [Months in Context] )
+
+Unused Seats =
+[Licensed Seats] * [Months in Context] - [Active Seats]
+
+Accounts Over Credit Allowance =
+SUMX (
+    VALUES ( Usage[account_id] ),
+    IF ( [Credit Utilization %] > 1, 1, 0 )
+)
+
+
+//====================================================================================
+// 3. TIME INTELLIGENCE  (no date table needed: usage_month is always the 1st of a month)
+//====================================================================================
+API Calls (Prior Month) =
+VAR _m = [Reporting Month]
+RETURN
+    CALCULATE ( [API Calls], Usage[usage_month] = EDATE ( _m, -1 ) )
+
+API MoM % =
+VAR _m   = [Reporting Month]
+VAR _cur = CALCULATE ( [API Calls], Usage[usage_month] = _m )
+VAR _prv = CALCULATE ( [API Calls], Usage[usage_month] = EDATE ( _m, -1 ) )
+RETURN
+    DIVIDE ( _cur - _prv, _prv )
+
+API 3M Growth % =
+VAR _m   = [Reporting Month]
+VAR _cur = CALCULATE ( [API Calls], Usage[usage_month] = _m )
+VAR _3m  = CALCULATE ( [API Calls], Usage[usage_month] = EDATE ( _m, -3 ) )
+RETURN
+    DIVIDE ( _cur - _3m, _3m )
+
+Active Seats MoM % =
+VAR _m   = [Reporting Month]
+VAR _cur = CALCULATE ( [Active Seats], Usage[usage_month] = _m )
+VAR _prv = CALCULATE ( [Active Seats], Usage[usage_month] = EDATE ( _m, -1 ) )
+RETURN
+    DIVIDE ( _cur - _prv, _prv )
+
+API Usage Index =
+VAR _first = CALCULATE ( MIN ( Usage[usage_month] ), ALL ( Usage[usage_month] ) )
+VAR _base  = CALCULATE ( [API Calls], Usage[usage_month] = _first )
+RETURN
+    DIVIDE ( [API Calls], _base ) * 100
+
+
+// Cohort trend lines - the "flat topline hides diverging cohorts" story (Executive Summary page)
+API Usage Index - All Accounts =
+CALCULATE ( [API Usage Index], REMOVEFILTERS ( AccountSnapshot ) )
+
+API Usage Index - Churn Risk =
+CALCULATE (
+    [API Usage Index],
+    AccountSnapshot[account_status] = "Churn Risk"
+)
+
+API Usage Index - Expansion =
+CALCULATE (
+    [API Usage Index],
+    AccountSnapshot[account_status] = "Expansion Opportunity"
+)
+
+API Usage Index - Healthy & Low Adoption =
+CALCULATE (
+    [API Usage Index],
+    AccountSnapshot[account_status] IN { "Healthy", "Low Adoption" }
+)
+
+
+//====================================================================================
+// 4. CHURN RADAR
+//====================================================================================
+// Dynamic: works for ANY reporting month and ANY slicer combination
+Accounts with Severe Usage Decline =
+SUMX (
+    VALUES ( Usage[account_id] ),
+    IF ( [API MoM %] <= [Churn Threshold], 1, 0 )
+)
+
+// Snapshot-based: account status as of the latest data month (see scripts/data_enhancement.py)
+Accounts at Risk =
+CALCULATE ( [Total Accounts], AccountSnapshot[account_status] = "Churn Risk" )
+
+ARR at Risk =
+CALCULATE ( [ARR], AccountSnapshot[account_status] = "Churn Risk" )
+
+% Accounts at Risk =
+DIVIDE ( [Accounts at Risk], [Total Accounts] )
+
+% ARR at Risk =
+DIVIDE ( [ARR at Risk], [ARR] )
+
+
+//====================================================================================
+// 5. EXPANSION & CROSS-SELL
+//====================================================================================
+Expansion Accounts =
+CALCULATE ( [Total Accounts], AccountSnapshot[account_status] = "Expansion Opportunity" )
+
+Expansion Base ARR =
+CALCULATE ( [ARR], AccountSnapshot[account_status] = "Expansion Opportunity" )
+
+Estimated Expansion ARR =
+[Expansion Base ARR] * [Expansion Uplift Assumption]     // illustrative pipeline sizing
+
+Tier Upgrade Candidates =
+CALCULATE (
+    [Total Accounts],
+    AccountSnapshot[account_status] = "Expansion Opportunity",
+    Usage[contract_tier] <> "Enterprise"
+)
+
+Low Adoption Accounts =
+CALCULATE ( [Total Accounts], AccountSnapshot[account_status] = "Low Adoption" )
+
+Low Adoption ARR =
+CALCULATE ( [ARR], AccountSnapshot[account_status] = "Low Adoption" )
+
+Healthy Accounts =
+CALCULATE ( [Total Accounts], AccountSnapshot[account_status] = "Healthy" )
+
+
+//====================================================================================
+// 6. STORYTELLING  (dynamic text for titles / callouts)
+//====================================================================================
+Headline Insight =
+"Aggregate API volume is "
+    & FORMAT ( [API 3M Growth %], "+0.0%;-0.0%" )
+    & " vs 3 months ago, but "
+    & FORMAT ( [Accounts at Risk], "#,0" )
+    & " accounts ("
+    & FORMAT ( [% Accounts at Risk], "0%" )
+    & ") show severe usage decline, putting "
+    & FORMAT ( [ARR at Risk] / 1000000, "$#,0.0" )
+    & "M ARR ("
+    & FORMAT ( [% ARR at Risk], "0%" )
+    & ") at risk."
+
+Churn Radar Callout =
+FORMAT ( [Accounts at Risk], "#,0" )
+    & " accounts are in severe decline. Enterprise accounts hold "
+    & FORMAT (
+        DIVIDE (
+            CALCULATE ( [ARR at Risk], Usage[contract_tier] = "Enterprise" ),
+            [ARR at Risk]
+        ),
+        "0%"
+    )
+    & " of the ARR at risk."
+
+Expansion Callout =
+FORMAT ( [Expansion Accounts], "#,0" )
+    & " accounts are growing fast and near their seat or credit limit - about "
+    & FORMAT ( [Estimated Expansion ARR] / 1000000, "$#,0.0" )
+    & "M of upsell potential (assumes +"
+    & FORMAT ( [Expansion Uplift Assumption], "0%" )
+    & " seats)."
+
+
+//====================================================================================
+// 7. CONDITIONAL FORMATTING HELPERS  (use "Field value" in Format -> Conditional formatting)
+//====================================================================================
+Status Color =
+SWITCH (
+    SELECTEDVALUE ( AccountSnapshot[account_status] ),
+    "Churn Risk",            "#D64545",
+    "Expansion Opportunity", "#1F9D74",
+    "Low Adoption",          "#E8A33D",
+    "Healthy",               "#4C78A8",
+    "#8A94A6"
+)
+
+MoM Trend Color =
+SWITCH (
+    TRUE (),
+    [API MoM %] <= [Churn Threshold], "#D64545",
+    [API MoM %] < 0,                  "#E8A33D",
+    "#1F9D74"
+)
+
+MoM Trend Arrow =
+SWITCH (
+    TRUE (),
+    ISBLANK ( [API MoM %] ), "",
+    [API MoM %] <= [Churn Threshold], "▼▼ ",
+    [API MoM %] < 0,                  "▼ ",
+    "▲ "
+)

@@ -1,0 +1,19 @@
+feature,coefficient,direction
+mom,-1.5287775841132607,Decreases risk
+seat_mom,-0.8126514807564118,Decreases risk
+mom_prev,-0.78361459412494,Decreases risk
+trend3,0.6317155013925217,Increases risk
+contract_tier_Standard,0.5380983893652536,Increases risk
+vol,0.4071245342120423,Increases risk
+industry_vertical_Manufacturing,0.33449479936611304,Increases risk
+industry_vertical_Retail,0.3116354505065405,Increases risk
+seat_util,0.27786466557220507,Increases risk
+global_region_EMEA,0.2669479540362326,Increases risk
+industry_vertical_Logistics,0.2470110931576696,Increases risk
+contract_tier_Premium,0.23460886056250316,Increases risk
+industry_vertical_Technology,0.18074572880627574,Increases risk
+credit_util,0.16848340995566943,Increases risk
+api_t,0.08044230427329732,Increases risk
+global_region_APAC,0.0516637975454812,Increases risk
+annual_contract_value,0.04500198897694776,Increases risk
+industry_vertical_Healthcare,0.021535579755356846,Increases risk
