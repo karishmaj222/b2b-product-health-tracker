@@ -6,7 +6,7 @@ An end-to-end product analytics project that turns monthly usage telemetry for *
 
 ![Executive Summary](screenshots/powerbi_1_executive_summary.png)
 
-The full report (`.pbix`) is in [`dashboards/B2B_Product_Health_Tracker.pbix`](dashboards/B2B_Product_Health_Tracker.pbix), and a PDF export is in [`dashboards/`](dashboards/B2B_Product_Health_Tracker.pdf).
+The full report (`.pbix`) is in [`dashboards/BtoB Analyses_1000 accounts.pbix`](dashboards/B2B_Product_Health_Tracker.pbix), and a PDF export is in [`dashboards/`](dashboards/B2B_Product_Health_Tracker.pdf).
 
 ---
 
